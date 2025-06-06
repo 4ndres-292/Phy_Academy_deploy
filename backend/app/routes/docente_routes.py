@@ -1,5 +1,5 @@
 from flask import Blueprint
-from app.controllers.registro.docente_controller import registrar_docente
+from backend.app.controllers.registro.docente_controller import registrar_docente
 
 docente_bp = Blueprint('docente', __name__, url_prefix='/docentes')
 

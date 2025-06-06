@@ -1,6 +1,6 @@
 from flask import request, jsonify
-from app.models.docente_model import Docente
-from app.core.extensions import db
+from backend.app.models.docente_model import Docente
+from backend.app.core.extensions import db
 import re
 import bcrypt
 

@@ -1,6 +1,6 @@
 from flask import request, jsonify
-from app.models.estudiante_model import Estudiante
-from app.core.extensions import db
+from backend.app.models.estudiante_model import Estudiante
+from backend.app.core.extensions import db
 import bcrypt
 
 def registrar_estudiante():

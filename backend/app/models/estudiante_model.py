@@ -1,4 +1,4 @@
-from app.core.extensions import db
+from backend.app.core.extensions import db
 
 class Estudiante(db.Model):
     id = db.Column(db.Integer, primary_key=True)
