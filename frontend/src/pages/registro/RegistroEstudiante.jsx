@@ -110,6 +110,7 @@ export default function RegistroEstudiante({ onBackToHome }) {
         alert(data.error || "Error al registrar");
       }
     } catch (err) {
+      console.log(err)
       alert("Error de conexión con el servidor.");
     }
   };

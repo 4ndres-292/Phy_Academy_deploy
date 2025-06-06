@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { PiStudentFill } from "react-icons/pi";
 import { FaUserCircle, FaArrowRight } from "react-icons/fa";
 import EstudianteTrabajo from "../components/estudianteTrabajo";

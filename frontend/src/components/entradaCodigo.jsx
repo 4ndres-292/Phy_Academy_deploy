@@ -4,7 +4,7 @@ import { FaPython } from "react-icons/fa";
 
 const EntradaCodigo = ({ onChangeCode }) => {
 
-    const palabrasResaltadas = ["print", "def", "return", "import"];
+    //const palabrasResaltadas = ["print", "def", "return", "import"];
 
     const [code, setCode] = useState("");
 
@@ -14,7 +14,7 @@ const EntradaCodigo = ({ onChangeCode }) => {
         setCode(nuevoCodigo);
         onChangeCode(nuevoCodigo);
     };
-
+/*
     const resaltarCodigo = (codigo) => {
         return codigo.split(/\s+/).map((palabra, index) => (
             palabrasResaltadas.includes(palabra) ?
@@ -22,7 +22,7 @@ const EntradaCodigo = ({ onChangeCode }) => {
                 : <span key={index}>{palabra} </span>
         ));
     };
-
+*/
     return (
         <>
             <div className="flex items-center bg-black border border-white border-b-0 p-2 w-fit -mt-2 ml-12 text-white font-semibold space-x-2">

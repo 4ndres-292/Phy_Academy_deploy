@@ -98,7 +98,7 @@ export default function RegistroProfesor({ onBackToHome }) {
     }
 
     try {
-      const { password, confirmPassword, ...rest } = formData;
+      const { password, ...rest } = formData;
       const docenteData = {
         ...rest,
         contrasena: password, // Este campo debe coincidir con el nombre esperado en el backend
