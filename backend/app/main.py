@@ -12,7 +12,7 @@ from backend.app.routes.estudiante_routes import estudiante_bp
 
 app = Flask(
     __name__,
-    static_folder="../frontend/dist",  # ruta relativa desde este archivo
+    static_folder=os.path.abspath(os.path.join(os.path.dirname(__file__), '../../frontend/dist')),  # ruta relativa desde este archivo
     static_url_path="/"
 )
 CORS(app)
@@ -24,7 +24,7 @@ app.register_blueprint(auth_bp)
 app.register_blueprint(docente_bp)
 app.register_blueprint(estudiante_bp)
 
-@app.route("/")
+@app.route("/health")
 def health_check():
     try:
         db.session.execute(text("SELECT 1"))
