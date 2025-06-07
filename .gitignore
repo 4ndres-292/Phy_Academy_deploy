@@ -3,7 +3,7 @@
 **/flask/
 # Modulos de node
 **/node_modules/
-**/package-lock.json
+# **/package-lock.json
 # Ignorar todos los directorios _pycache_
 __pycache__/
 **/*.pyc
