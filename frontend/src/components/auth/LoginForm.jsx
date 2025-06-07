@@ -1,5 +1,9 @@
+/* global process */
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -9,7 +13,7 @@ export default function LoginForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5000/api/login", {
+      const res = await fetch("${API_URL}/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),

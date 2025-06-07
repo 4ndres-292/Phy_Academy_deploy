@@ -1,4 +1,8 @@
+/* global process */
+
 import React, { useState, useRef, useEffect } from "react";
+
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
 const StarryBackground = () => {
   const canvasRef = useRef(null);
@@ -96,7 +100,7 @@ export default function RegistroEstudiante({ onBackToHome }) {
       const payload = { ...formData };
       delete payload.confirmPassword;
 
-      const res = await fetch("http://localhost:5000/estudiantes/registrar", {
+      const res = await fetch("${API_URL}/estudiantes/registrar", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)

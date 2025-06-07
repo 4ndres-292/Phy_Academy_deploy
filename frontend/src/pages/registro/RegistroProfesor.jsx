@@ -1,4 +1,8 @@
+/* global process */
+
 import React, { useState, useRef, useEffect } from "react";
+
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
 const StarryBackground = () => {
   const canvasRef = useRef(null);
@@ -104,7 +108,7 @@ export default function RegistroProfesor({ onBackToHome }) {
         contrasena: password, // Este campo debe coincidir con el nombre esperado en el backend
       };
 
-      const response = await fetch("http://127.0.0.1:5000/docentes/registrar", {
+      const response = await fetch("${API_URL}/docentes/registrar", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(docenteData),
