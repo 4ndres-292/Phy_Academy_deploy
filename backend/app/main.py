@@ -1,5 +1,4 @@
 import os
-print("🔧 DATABASE_URL:", os.environ.get("DATABASE_URL"))
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from sqlalchemy import text
@@ -33,20 +32,6 @@ def health_check():
     except Exception as e:
         return {"error": str(e)}, 500
     
-
-@app.route("/_routes")
-def list_routes():
-    import urllib
-    output = []
-    for rule in app.url_map.iter_rules():
-        methods = ",".join(rule.methods)
-        output.append({
-            "endpoint": rule.endpoint,
-            "rule":   rule.rule,
-            "methods": methods
-        })
-    return jsonify(sorted(output, key=lambda x: x["rule"]))
-
 
 # Rutas para servir frontend desde dist/
 @app.route('/', defaults={'path': ''})

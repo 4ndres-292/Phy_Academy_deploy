@@ -2,7 +2,7 @@
 FROM python:3.11-slim AS backend
 
 WORKDIR /app
-COPY backend/requirements.txt ./
+COPY backend/requirements.txt .
 RUN python -m pip install --no-cache-dir -r requirements.txt
 
 COPY backend/ ./backend/
@@ -28,12 +28,10 @@ EXPOSE 8080
 # Copia deps y código backend
 COPY --from=backend /usr/local/lib/python3.11 /usr/local/lib/python3.11
 COPY --from=backend /usr/local/bin /usr/local/bin
-COPY backend/ ./backend/
+COPY --from=backend /app/backend ./backend
 
-# Copia build de frontend al lugar donde Flask lo busca
+# Copia build del frontend (la carpeta dist)
 COPY --from=frontend /app/dist ./frontend/dist
 
-ENV DATABASE_URL=postgresql://postgres:ownbpILrsZafWfBBvAxwzIkIbjtHfBXW@postgres.railway.internal:5432/railway
-
-# Usa shell para expandir $PORT
+# Comando para arrancar el servidor
 CMD ["sh", "-c", "exec gunicorn --bind 0.0.0.0:${PORT} backend.app.main:app"]
