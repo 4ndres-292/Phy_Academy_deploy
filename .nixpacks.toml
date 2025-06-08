@@ -10,4 +10,4 @@ cmds = [
 ]
 
 [start]
-cmd = "python -m backend.app.main"
+cmd = "python backend/app/main.py"
