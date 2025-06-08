@@ -33,5 +33,7 @@ COPY backend/ ./backend/
 # Copia build de frontend al lugar donde Flask lo busca
 COPY --from=frontend /app/dist ./frontend/dist
 
+ENV DATABASE_URL=postgresql://postgres:ownbpILrsZafWfBBvAxwzIkIbjtHfBXW@postgres.railway.internal:5432/railway
+
 # Usa shell para expandir $PORT
 CMD ["sh", "-c", "exec gunicorn --bind 0.0.0.0:${PORT} backend.app.main:app"]
