@@ -7,13 +7,6 @@ RUN python -m pip install --no-cache-dir -r requirements.txt
 
 COPY backend/ ./backend/
 
-# Define la variable FLASK_APP con la ruta a tu aplicación flask.
-# Ajusta según tu estructura real, aquí asumo que tienes backend/app/main.py y app está definido allí.
-ENV FLASK_APP=backend.app.main:app
-
-# Define también el entorno para que flask use el modo de producción
-ENV FLASK_ENV=production
-
 # Ejecuta la migración
 RUN flask db upgrade
 
