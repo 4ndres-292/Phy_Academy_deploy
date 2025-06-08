@@ -4,9 +4,10 @@ FROM python:3.11-slim AS backend
 WORKDIR /app
 COPY backend/requirements.txt .
 RUN python -m pip install --no-cache-dir -r requirements.txt
-RUN flask db upgrade
 
 COPY backend/ ./backend/
+
+RUN flask db upgrade
 
 # --- Etapa 2: Frontend build ---
 FROM node:20 AS frontend
