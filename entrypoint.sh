@@ -1,11 +1,11 @@
 #!/bin/sh
 
 # Ir al directorio del backend
-cd backend
+#cd backend
 
 # Establecer FLASK_APP (ajusta si tu estructura es diferente)
-export FLASK_APP=app.main:app
-export FLASK_ENV=production
+#export FLASK_APP=app.main:app
+#export FLASK_ENV=production
 
 # Ejecutar migraciones
 echo "Ejecutando migraciones..."
