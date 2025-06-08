@@ -35,7 +35,6 @@ COPY --from=backend /app/backend ./backend
 
 # 3) Importa la carpeta de migraciones y el alembic.ini
 COPY --from=backend /app/migrations ./migrations
-COPY --from=backend /app/alembic.ini ./alembic.ini
 
 # 4) Copia el build del frontend
 COPY --from=frontend /app/dist ./frontend/dist
