@@ -1,15 +1,18 @@
+# nixpacks.toml
+providers = ["python"]     # quitas "node" para que no genere perfil nodejs
+
 [phases.setup]
-nixPkgs = ["python311", "nodejs_20"]
+nixPkgs = ["python311"]
 
 [phases.install]
 cmds = [
   "pip install -r backend/requirements.txt",
-  "cd frontend && npm install"
+  "npm install --prefix frontend"     # npm viene preinstalado en el builder python
 ]
 
 [phases.build]
 cmds = [
-  "cd frontend && npm run build"
+  "npm run --prefix frontend build"
 ]
 
 [start]
