@@ -28,9 +28,8 @@ COPY backend/ ./backend/
 # Copia la carpeta dist del frontend al lugar donde Flask la sirve
 COPY --from=frontend /app/dist ./frontend/dist
 
-# Expone el puerto que Railway asigna (por defecto 8080 en Docker)
-ENV PORT 8080
+# (al final de tu Dockerfile)
 EXPOSE 8080
 
-# Usa Gunicorn para producción
-CMD ["gunicorn", "--bind", "0.0.0.0:8080", "backend.app.main:app"]
+# Usa un shell para expandir la variable $PORT que define Railway
+CMD ["sh", "-c", "gunicorn --bind 0.0.0.0:${PORT:-8080} backend.app.main:app"]
