@@ -15,6 +15,8 @@ ENV FLASK_APP=backend.app.main:app
 ENV FLASK_ENV=production
 
 # Ejecuta la migración
+RUN flask db init
+RUN flask db -m "primera migracion"
 RUN flask db upgrade
 
 # --- Etapa 2: Frontend build ---
