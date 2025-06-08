@@ -7,9 +7,6 @@ RUN python -m pip install --no-cache-dir -r requirements.txt
 
 COPY backend/ ./backend/
 
-# Ejecuta la migración
-RUN flask db upgrade
-
 # --- Etapa 2: Frontend build ---
 FROM node:20 AS frontend
 
