@@ -2,21 +2,28 @@
 FROM python:3.11-slim AS backend
 
 WORKDIR /app
+
+# Instala dependencias
 COPY backend/requirements.txt .
 RUN python -m pip install --no-cache-dir -r requirements.txt
 
+# Copia el código backend y las migraciones
 COPY backend /app/backend
 COPY backend/migrations /app/migrations
+COPY backend/alembic.ini /app/alembic.ini
 
 
 # --- Etapa 2: Frontend build ---
 FROM node:20 AS frontend
 
 WORKDIR /app
+
 COPY frontend/package*.json ./
 RUN npm install
+
 COPY frontend/ ./
 RUN npm run build
+
 
 # --- Etapa final ---
 FROM python:3.11-slim
@@ -26,21 +33,24 @@ WORKDIR /app
 ENV PORT=8080
 EXPOSE 8080
 
-# 1) Copia las librerías instaladas
+# Copia las librerías de Python
 COPY --from=backend /usr/local/lib/python3.11 /usr/local/lib/python3.11
 COPY --from=backend /usr/local/bin /usr/local/bin
 
-# 2) Copia el código de tu app
+# Copia el código de backend y las migraciones
 COPY --from=backend /app/backend ./backend
-
-# 3) Importa la carpeta de migraciones y el alembic.ini
 COPY --from=backend /app/migrations ./migrations
+COPY --from=backend /app/alembic.ini ./alembic.ini
 
-# 4) Copia el build del frontend
+# Copia el frontend ya compilado
 COPY --from=frontend /app/dist ./frontend/dist
 
-# 5) Define variable para Flask CLI
+# Variable obligatoria para flask db
 ENV FLASK_APP=backend.app.main:app
 
-# 6) Ejecuta las migraciones y luego arranca Gunicorn
+# El contenedor necesita esta variable para conectarse a tu base
+# En Railway o producción asegúrate que DATABASE_URL esté definida
+# ENV DATABASE_URL=postgresql://postgres:AgEdzTQqJaixxALdrxxulmgQTWUKzGNl@postgres-uety.railway.internal:5432/railway
+
+# Comando final: aplicar migraciones y arrancar Gunicorn
 CMD flask db upgrade && gunicorn --bind 0.0.0.0:${PORT} backend.app.main:app
