@@ -5,7 +5,9 @@ WORKDIR /app
 COPY backend/requirements.txt .
 RUN python -m pip install --no-cache-dir -r requirements.txt
 
-COPY backend/ ./backend/
+COPY backend /app/backend
+COPY backend/migrations /app/migrations
+
 
 # --- Etapa 2: Frontend build ---
 FROM node:20 AS frontend
