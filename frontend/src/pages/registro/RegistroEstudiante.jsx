@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 
-//const API_URL =  import.meta.env.VITE_API_URL;
+const API_URL =  import.meta.env.VITE_API_URL;
 
 const StarryBackground = () => {
   const canvasRef = useRef(null);
@@ -98,7 +98,7 @@ export default function RegistroEstudiante({ onBackToHome }) {
       const payload = { ...formData };
       delete payload.confirmPassword;
       console.log(API_URL);
-      const res = await fetch(`/estudiantes/registrar`, {
+      const res = await fetch(`${API_URL}/estudiantes/registrar`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
