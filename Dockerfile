@@ -29,4 +29,6 @@ COPY backend/ ./backend/
 COPY --from=frontend /app/dist ./frontend/dist
 
 EXPOSE 5000
-CMD ["python", "backend/app/main.py"]
+# al final de Dockerfile
+CMD ["python", "-m", "backend.app.main"]
+
