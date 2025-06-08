@@ -4,6 +4,7 @@ FROM python:3.11-slim AS backend
 WORKDIR /app
 COPY backend/requirements.txt .
 RUN python -m pip install --no-cache-dir -r requirements.txt
+RUN flask db upgrade
 
 COPY backend/ ./backend/
 
@@ -34,6 +35,4 @@ COPY --from=backend /app/backend ./backend
 COPY --from=frontend /app/dist ./frontend/dist
 
 # Comando para arrancar el servidor
-COPY entrypoint.sh ./entrypoint.sh
-RUN chmod +x entrypoint.sh
-CMD ["sh", "./entrypoint.sh"]
+CMD ["sh", "-c", "exec gunicorn --bind 0.0.0.0:${PORT} backend.app.main:app"]
