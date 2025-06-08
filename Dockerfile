@@ -26,13 +26,22 @@ WORKDIR /app
 ENV PORT=8080
 EXPOSE 8080
 
+# 1) Copia las librerías instaladas
 COPY --from=backend /usr/local/lib/python3.11 /usr/local/lib/python3.11
 COPY --from=backend /usr/local/bin /usr/local/bin
+
+# 2) Copia el código de tu app
 COPY --from=backend /app/backend ./backend
+
+# 3) Importa la carpeta de migraciones y el alembic.ini
+COPY --from=backend /app/migrations ./migrations
+COPY --from=backend /app/alembic.ini ./alembic.ini
+
+# 4) Copia el build del frontend
 COPY --from=frontend /app/dist ./frontend/dist
 
-# Nueva línea para definir FLASK_APP
+# 5) Define variable para Flask CLI
 ENV FLASK_APP=backend.app.main:app
 
-# Ejecuta migraciones ANTES de arrancar el servidor
+# 6) Ejecuta las migraciones y luego arranca Gunicorn
 CMD flask db upgrade && gunicorn --bind 0.0.0.0:${PORT} backend.app.main:app
