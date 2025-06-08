@@ -106,7 +106,7 @@ export default function RegistroProfesor({ onBackToHome }) {
         contrasena: password, // Este campo debe coincidir con el nombre esperado en el backend
       };
 
-      const response = await fetch(`${API_URL}/docentes/registrar`, {
+      const response = await fetch(`${API_URL}docentes/registrar`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(docenteData),
