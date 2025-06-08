@@ -34,4 +34,6 @@ COPY --from=backend /app/backend ./backend
 COPY --from=frontend /app/dist ./frontend/dist
 
 # Comando para arrancar el servidor
-CMD ["sh", "-c", "exec gunicorn --bind 0.0.0.0:${PORT} backend.app.main:app"]
+COPY entrypoint.sh ./entrypoint.sh
+RUN chmod +x entrypoint.sh
+CMD ["sh", "./entrypoint.sh"]
