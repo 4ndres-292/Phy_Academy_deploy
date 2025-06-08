@@ -31,6 +31,21 @@ def health_check():
         return {"message": "Conexión exitosa a la base de datos"}, 200
     except Exception as e:
         return {"error": str(e)}, 500
+    
+
+@app.route("/_routes")
+def list_routes():
+    import urllib
+    output = []
+    for rule in app.url_map.iter_rules():
+        methods = ",".join(rule.methods)
+        output.append({
+            "endpoint": rule.endpoint,
+            "rule":   rule.rule,
+            "methods": methods
+        })
+    return jsonify(sorted(output, key=lambda x: x["rule"]))
+
 
 # Rutas para servir frontend desde dist/
 @app.route('/', defaults={'path': ''})
