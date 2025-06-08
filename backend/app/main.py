@@ -45,4 +45,7 @@ def serve_frontend(path):
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))  # usa PORT que da Railway, si no usa 5000
-    app.run(host="0.0.0.0", port=port, debug=True)
+    with app.app_context():
+        from flask_migrate import upgrade
+        upgrade()  # Aplica migraciones en Railway automáticamente
+    app.run(host="0.0.0.0", port=port)
