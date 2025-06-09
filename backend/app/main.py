@@ -17,7 +17,7 @@ app = Flask(
 )
 CORS(app)
 iniciar_base_datos(app)
-migrate = Migrate(app, db)
+# migrate = Migrate(app, db)
 
 # Registrar blueprints
 app.register_blueprint(auth_bp)

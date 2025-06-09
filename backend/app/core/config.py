@@ -11,4 +11,4 @@ class Config:
     SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    print("🧪 URI BD:", SQLALCHEMY_DATABASE_URI)  # eliminar luego en producción
+print("🧪 URI BD:", os.getenv("DATABASE_URL"))  # eliminar luego en producción
