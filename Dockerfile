@@ -53,6 +53,6 @@ ENV FLASK_APP=backend.app.main:app
 # ENV DATABASE_URL=postgresql://postgres:AgEdzTQqJaixxALdrxxulmgQTWUKzGNl@postgres-uety.railway.internal:5432/railway
 
 # Comando final: aplicar migraciones y arrancar Gunicorn
-CMD python backend/migrate.py && gunicorn --bind 0.0.0.0:${PORT} backend.app.main:app
+# CMD python backend/migrate.py && gunicorn --bind 0.0.0.0:${PORT} backend.app.main:app
 
-#CMD flask db upgrade && gunicorn --bind 0.0.0.0:${PORT} backend.app.main:app
+CMD flask db upgrade && gunicorn --bind 0.0.0.0:${PORT} backend.app.main:app
