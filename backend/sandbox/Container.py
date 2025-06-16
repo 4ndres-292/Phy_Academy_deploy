@@ -9,7 +9,7 @@ class Contenedor:
 # ejecuta el codigo en un contenedor
     def ejecutar_codigo(self, codigo):
         # url_sandbox = f'http://192.168.0.3:3000/' # en produccion
-        url_sandbox = f'http://localhost:3000/' # en pruebas
+        url_sandbox = f'SANDBOX_URL' # en pruebas
         payload = {
             "code": codigo,
             "timeoutMs": 1000,

@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from ..controllers.ejecutador_controller import ejecutar_codigo
+from backend.app.controllers.ejecutador_controller import ejecutar_codigo
 # from ..controllers.ejecutador_controller import probar
 ejecutador_bp = Blueprint("ejecutador", __name__)
 
