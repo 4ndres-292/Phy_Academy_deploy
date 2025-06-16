@@ -4,6 +4,7 @@ from backend.sandbox.sandbox_interface import Sandbox
 def ejecutar_codigo(request):
     datos = request.get_json()
     codigo = datos.get('codigo')
+    print(codigo)
     sandbox_prueba = Sandbox(1, codigo)
     sandbox_prueba.correr_codigo()
     sandbox_prueba.crear_pool()
