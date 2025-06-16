@@ -18,8 +18,5 @@ RUN pip install flask==3.1.0
 # Cambiar al usuario seguro
 USER sandboxuser
 
-# Exponer el puerto (opcional pero recomendado)
-EXPOSE 5000
-
 # Comando que inicia el servidor Flask
 CMD [ "python", "main.py" ]
