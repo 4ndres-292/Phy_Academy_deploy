@@ -1,7 +1,11 @@
+import os
 from flask import Flask, request, jsonify
 import subprocess
+from flask_cors import CORS  # si vas a necesitar CORS
 
 app = Flask(__name__)
+CORS(app)  # si tu backend general o frontend hace llamadas directas; si solo tu servidor llama, quizá no haga falta.
+
 @app.route('/', methods=['POST'])
 def ejecutar_codigo():
     data = request.get_json()
@@ -30,4 +34,7 @@ def ejecutar_codigo():
             "isError": True,
             "timedOut": True
         })
-app.run(host='0.0.0.0', port=3000)
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 3000))
+    app.run(host="0.0.0.0", port=port)

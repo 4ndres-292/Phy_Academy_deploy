@@ -1,3 +1,4 @@
+import os
 import requests
 
 class Contenedor:
@@ -6,24 +7,16 @@ class Contenedor:
         self.instancia = instancia
         self.ip = ''
         self.limpio = False
-# ejecuta el codigo en un contenedor
+
     def ejecutar_codigo(self, codigo):
-        # url_sandbox = f'http://192.168.0.3:3000/' # en produccion
-        url_sandbox = f'SANDBOX_URL' # en pruebas
-        payload = {
-            "code": codigo,
-            "timeoutMs": 1000,
-        }
-        
+        url_sandbox = os.getenv("SANDBOX_URL", "http://localhost:3000")  # en Compose: http://sandbox:3000
+        payload = {"code": codigo, "timeoutMs": 1000}
         try:
-            respuesta = requests.post(url=url_sandbox, json=payload, timeout=5)
+            respuesta = requests.post(url_sandbox, json=payload, timeout=5)
             respuesta.raise_for_status()
-            data = respuesta.json()
-            return data
-            # print(data)
+            return respuesta.json()
         except requests.exceptions.RequestException as e:
-            # print(e)
-            return f'Error al conectar al sandbox {e}'
+            return {"error": f"Error al conectar al sandbox: {e}"}
 
 # Obtener instancia (sandbox)
     def get_instancia(self):

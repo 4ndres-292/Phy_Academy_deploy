@@ -12,11 +12,15 @@ COPY ./container/main.py ./main.py
 # Dar permisos de ejecución
 RUN chmod +x main.py
 
-# Instalar Flask versión 3.1.0
-RUN pip install flask==3.1.0
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Cambiar al usuario seguro
 USER sandboxuser
 
+# Documentar puerto
+EXPOSE 3000
+
 # Comando que inicia el servidor Flask
-CMD [ "python", "main.py" ]
+#CMD [ "python", "main.py" ]
+CMD ["sh", "-c", "python main.py"]
