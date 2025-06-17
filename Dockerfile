@@ -3,14 +3,26 @@ FROM python:3.11-slim AS backend
 
 WORKDIR /app
 
-# Instala dependencias
+# Instala herramientas necesarias para compilar dependencias
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    gcc \
+    libffi-dev \
+    libssl-dev \
+    python3-dev \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copia e instala las dependencias de Python
 COPY backend/requirements.txt .
+RUN python -m pip install --upgrade pip
 RUN python -m pip install --no-cache-dir -r requirements.txt
 
 # Copia el código backend y las migraciones
 COPY backend /app/backend
 COPY backend/migrations /app/migrations
 COPY backend/alembic.ini /app/alembic.ini
+
 
 
 # --- Etapa 2: Frontend build ---
